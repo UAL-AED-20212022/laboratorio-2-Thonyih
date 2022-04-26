@@ -3,85 +3,90 @@ from models.LinkedList import LinkedList
 
 def main():
 
-    lista_ligada = LinkedList()
+    try:
 
-    while True:
+        lista_ligada = LinkedList()
 
-        comandos = input().split()
+        while True:
 
-        if comandos[0] == "RPI":      #Registar país no fim da lista
+            comandos = input().split()
 
-            lista_ligada.insert_at_start(comandos[1])
+            if comandos[0] == "RPI":      #Registar país no fim da lista
 
-            lista_ligada.traverse_list()
+                lista_ligada.insert_at_start(comandos[1])
+
+                lista_ligada.traverse_list()
+                    
+            elif comandos[0] == "RPF":     #Registar país no fim da lista
+
+                lista_ligada.insert_at_end(comandos[1])
+
+                lista_ligada.traverse_list()
+
+            elif comandos[0] == "RPDE":     #Registar país depois de outro elemento já registado
+
+                lista_ligada.insert_after_item(comandos[2], comandos[1])
+
+                lista_ligada.traverse_list()
+
+            elif comandos[0] == "RPAE":     #Registar país antes outro elemento.
+
+                lista_ligada.insert_before_item(comandos[2], comandos[1])
+
+                lista_ligada.traverse_list()
                 
-        elif comandos[0] == "RPF":     #Registar país no fim da lista
+            elif comandos[0] == "RPII":     #Registar pais num determinado indice
 
-            lista_ligada.insert_at_end(comandos[1])
+                lista_ligada.insert_at_index(int(comandos[2]), comandos[1])
 
-            lista_ligada.traverse_list()
+                lista_ligada.traverse_list()
 
-        elif comandos[0] == "RPDE":     #Registar país depois de outro elemento já registado
+            elif comandos[0] == "VNE":      #Verificar número elementos
 
-            lista_ligada.insert_after_item(comandos[2], comandos[1])
+                temp = lista_ligada.get_count()
+                print(f"O número de elementos são {temp}.")
 
-            lista_ligada.traverse_list()
+            elif comandos[0] == "VP":    #Verificar país
 
-        elif comandos[0] == "RPAE":     #Registar país antes outro elemento.
+                if lista_ligada.search_item(comandos[1]):
+                    print(f"O país {comandos[1]} encontra-se na lista.")
+                else:
+                    print(F"O país {comandos[1]} não se encontra na lista.")
+                    
+            elif comandos[0] == "EPE":  #Eliminiar primeiro elemento
 
-            lista_ligada.insert_before_item(comandos[2], comandos[1])
-
-            lista_ligada.traverse_list()
-           
-        elif comandos[0] == "RPII":     #Registar pais num determinado indice
-
-            lista_ligada.insert_at_index(int(comandos[2]), comandos[1])
-
-            lista_ligada.traverse_list()
-
-        elif comandos[0] == "VNE":      #Verificar número elementos
-
-            temp = lista_ligada.get_count()
-            print(f"O número de elementos são {temp}.")
-
-        elif comandos[0] == "VP":    #Verificar país
-
-            if lista_ligada.search_item(comandos[1]):
-                print(f"O país {comandos[1]} não se encontra na lista.")
-            else:
-                print(F"O país {comandos[1]} encontra-se na lista.")
-                
-        elif comandos[0] == "EPE":  #Eliminiar primeiro elemento
-
-            temp = lista_ligada.start_node.get_item()
-
-            print(f"O país {temp} foi eliminado da lista.")
-
-            lista_ligada.delete_at_start()
-        
-        elif comandos[0] == "EUE":   #Eliminar último elemento
-            
-            temp = lista_ligada.get_last_node()
-
-            print(f"O país {temp} foi eliminado da lista.")
-
-            lista_ligada.delete_at_end()
-
-        elif comandos[0] == "EP":    #Eliminar país
-
-            temp = comandos[1]
-
-            if lista_ligada.search_item(comandos[1]) == True:
+                temp = lista_ligada.start_node.get_item()
 
                 print(f"O país {temp} foi eliminado da lista.")
 
-                lista_ligada.delete_element_by_value(comandos[1])
+                lista_ligada.delete_at_start()
+            
+            elif comandos[0] == "EUE":   #Eliminar último elemento
+                
+                temp = lista_ligada.get_last_node()
+
+                print(f"O país {temp} foi eliminado da lista.")
+
+                lista_ligada.delete_at_end()
+
+            elif comandos[0] == "EP":    #Eliminar país
+
+                temp = comandos[1]
+
+                if lista_ligada.search_item(comandos[1]) == True:
+
+                    print(f"O país {temp} foi eliminado da lista.")
+
+                    lista_ligada.delete_element_by_value(comandos[1])
+
+                else:
+                    print(f"O país {temp} encontra-se na lista.")
 
             else:
-                print(f"O país {temp} não se encontra na lista.")
+                print()
 
-        else:
-            print()
+    except EOFError:
+                return
 
         
 
